@@ -18,12 +18,12 @@ body{
   padding: 0.4rem;
   padding-top: 0.8rem;
   padding-bottom: 0.8rem;
-  font-size: 150%;
+  font-size: 160%;
   font-weight: bold;
   opacity: calc(70%);
   border: none;
   border-radius: 6px;
-  background-color: #e0e0e0;
+  background-color: #fff;
   margin-bottom: 0.8rem;
   outline: none;
 }

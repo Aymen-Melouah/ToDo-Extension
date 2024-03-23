@@ -1,5 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('add-task').addEventListener('click', addTaskFromInput);
+document.getElementById('add-task').addEventListener('click', addTaskFromInput);
+
+//add task buy click enter
+document.getElementById('new-task').addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    addTaskFromInput();
+  }
+});
+
+//focus on the new task input when the user presses Enter on the title input
+document.getElementById('list-title').addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault(); // Prevent the default form submission
+    document.getElementById('new-task').focus(); // Focus on the new task input
+  }
+});
+
   loadTasks();
 });
 
@@ -41,6 +57,27 @@ function addTask(taskValue, isCompleted = false) {
   ul.appendChild(li);
 
 }
+
+function saveTitle() {
+  const input = document.getElementById('list-title');
+  const title = input.value.trim();
+  if (title !== '') {
+    localStorage.setItem('listTitle', title);
+  } else {
+    localStorage.removeItem('listTitle'); // Remove the item from localStorage if title is empty
+  }
+}
+
+// Load saved title when the page is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  const savedTitle = localStorage.getItem('listTitle');
+  if (savedTitle) {
+    document.getElementById('list-title').value = savedTitle;
+  }
+});
+
+// Save the title whenever the input value changes
+document.getElementById('list-title').addEventListener('input', saveTitle);
 
 function saveTasks() {
   const tasks = [];
